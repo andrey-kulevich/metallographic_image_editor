@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="./img/icon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>MetalEditor</title>
+</head>
+<body>
+  <!-- header -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light py-1">
+      <div class="container-fluid">
+        <a class="navbar-brand">Metallographic Image Editor</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <button type="button" class="btn btn-light">Загрузить</button>
+            </li>
+            <li class="nav-item">
+              <button type="button" class="btn btn-light">Сохранить</button>
+            </li>
+            <li class="nav-item">
+              <button type="button" class="btn btn-light">О программе</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+  </nav>
+  
+  <div class="row">
+    <div class="col-8 m-3">
+      <!-- canvas -->
+      <div class="canvas">
+          <canvas id="cv" width="1024" height="768">
+      </div>
+    </div>
+    <div class="col-3 m-3 p-0">
+      <!-- tool bar -->
+      <div class="toolbar">
+        <label for="customRange3" class="form-label pt-3 px-3">Example range</label>
+        <input type="range" class="form-range p-3" min="10" max="200" step="50" id="customRange3">
+        <div class="input-group p-3">
+          <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+          <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+        </div>
+        <div class="input-group p-3">
+          <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+          <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+        </div>
+        <div class="input-group p-3">
+          <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+          <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
