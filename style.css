@@ -3,6 +3,10 @@
 }
 
 .canvas {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: auto;
+    margin-right: auto;
     width: 1024px;
     height: 768px;
     box-shadow: 0 0 7px rgba(0,0,0,0.4);
