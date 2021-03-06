@@ -20,4 +20,30 @@ $('#file-input').change((event) => {
     }
 })
 
+$('#save').click((e) => {
+    e.target.setAttribute('download', 'img.jpg')
+    e.target.setAttribute('href', canvas.toDataURL("image/jpg").replace("image/jpg", "image/octet-stream"))
+})
+
+function drawScaleText(text) {
+    $('canvas').drawText({
+        layer: true,
+        fillStyle: '#000',
+        x: canvas.width - 90, y: canvas.height - 50,
+        fontSize: 40,
+        fontFamily: 'Times New Roman',
+        text: text
+    }).drawLine({
+        layer: true,
+        strokeStyle: '#000',
+        strokeWidth: 10,
+        x1: canvas.width - 90, y1: canvas.height - 50
+    });
+}
+
+$('a[name=x20scale]').click(() => { drawScaleText('1 мкм') })
+$('a[name=x50scale]').click(() => { drawScaleText('2 мкм') })
+$('a[name=x100scale]').click(() => { drawScaleText('3 мкм') })
+$('a[name=x200scale]').click(() => { drawScaleText('4 мкм') })
+
 

@@ -6,6 +6,7 @@
     <link rel="icon" href="./img/icon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="jcanvas.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
@@ -23,7 +24,7 @@
               <input id="file-input" multiple type="file" name="name" style="display: none;" accept=".jpg, .jpeg, .png"/>
             </li>
             <li class="nav-item">
-              <button id="save" type="button" class="btn btn-light">Сохранить</button>
+              <a id="save" type="button" class="btn btn-light">Сохранить</a>
             </li>
             <li class="nav-item">
               <button id="about" type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#aboutModal">О программе</button>
@@ -58,10 +59,10 @@
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">Масштаб</a>
       <ul class="dropdown-menu">
-        <li><a class="dropdown-item">х20</a></li>
-        <li><a class="dropdown-item">х50</a></li>
-        <li><a class="dropdown-item">х100</a></li>
-        <li><a class="dropdown-item">х200</a></li>
+        <li><a name="x20scale" class="dropdown-item">х20</a></li>
+        <li><a name="x50scale" class="dropdown-item">х50</a></li>
+        <li><a name="x100scale" class="dropdown-item">х100</a></li>
+        <li><a name="x200scale" class="dropdown-item">х200</a></li>
       </ul>
     </li>
     <li class="nav-item" role="presentation">
