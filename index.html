@@ -19,19 +19,40 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <button type="button" class="btn btn-light">Загрузить</button>
+              <button id="upload" type="button" class="btn btn-light">Загрузить</button>
+              <input id="file-input" multiple type="file" name="name" style="display: none;" accept=".jpg, .jpeg, .png"/>
             </li>
             <li class="nav-item">
-              <button type="button" class="btn btn-light">Сохранить</button>
+              <button id="save" type="button" class="btn btn-light">Сохранить</button>
             </li>
             <li class="nav-item">
-              <button type="button" class="btn btn-light">О программе</button>
+              <button id="about" type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#aboutModal">О программе</button>
             </li>
           </ul>
         </div>
       </div>
   </nav>
   
+  <!-- about programm modal window -->
+  <div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="aboutModalLabel">О программе</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="px-2">Программа для обработки снимков с металлографического микроскопа.</p>
+          <p>
+            Разработчик - Кулевич Андрей, каф. ПОАС ВолгГТУ (профиль на GitHub: 
+            <a href="https://github.com/andrey-kulevich">https://github.com/andrey-kulevich</a>).
+          </p>
+          <p>Вдохновитель - Кулевич Виталий, каф. МВ ВолгГТУ.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- tool bar -->
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item dropdown">
@@ -44,35 +65,35 @@
       </ul>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#leftTopLabel" 
+      <button class="nav-link active" id="leftTopTab" data-bs-toggle="tab" data-bs-target="#leftTopLabel" 
               type="button" role="tab" aria-controls="home" aria-selected="true">Левая верхняя метка</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#leftBottomLabel" 
+      <button class="nav-link" id="leftBottomTab" data-bs-toggle="tab" data-bs-target="#leftBottomLabel" 
               type="button" role="tab" aria-controls="profile" aria-selected="false">Левая нижняя метка</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#randomLabel" 
+      <button class="nav-link" id="randomTab" data-bs-toggle="tab" data-bs-target="#randomLabel" 
               type="button" role="tab" aria-controls="contact" aria-selected="false">Произвольная метка</button>
     </li>
     <li class="nav-item" role="presentation">
       <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="leftTopLabel" role="tabpanel" aria-labelledby="home-tab">
+        <div class="tab-pane fade show active" id="leftTopLabel" role="tabpanel" aria-labelledby="leftTopTab">
           <div class="input-group ms-2 p-1">
             <input type="text" class="form-control" placeholder="Левая верхняя метка" aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2">ОК</button>
+            <button class="btn btn-outline-secondary" type="button" id="buttonLeftTop">ОК</button>
           </div>
         </div>
-        <div class="tab-pane fade" id="leftBottomLabel" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="tab-pane fade" id="leftBottomLabel" role="tabpanel" aria-labelledby="leftBottomTab">
           <div class="input-group ms-2 p-1">
             <input type="text" class="form-control" placeholder="Левая нижняя метка" aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2">ОК</button>
+            <button class="btn btn-outline-secondary" type="button" id="buttonLeftBottom">ОК</button>
           </div>
         </div>
-        <div class="tab-pane fade" id="randomLabel" role="tabpanel" aria-labelledby="contact-tab">
+        <div class="tab-pane fade" id="randomLabel" role="tabpanel" aria-labelledby="randomTab">
           <div class="input-group ms-2 p-1">
             <input type="text" class="form-control" placeholder="Произвольная метка" aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2">ОК</button>
+            <button class="btn btn-outline-secondary" type="button" id="buttonRandom">ОК</button>
           </div>
         </div>
       </div>
