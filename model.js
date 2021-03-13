@@ -26,11 +26,12 @@ export class Editor {
             photo.load(file)
             this.photos.push(photo)
         })
-        this.photos[this.activePhoto].img.onload = () => this.photos[this.activePhoto].draw()
+        this.getActivePhoto().img.onload = () => this.getActivePhoto().draw()
         this.addAction(Action.type.IMAGE_LOAD, [])
     }
 
     setActivePhoto(index) { this.activePhoto = index }
+    getActivePhoto() { return this.photos[this.activePhoto] }
 
     addAction(actionType, args) { this.actionsList.push(new Action(actionType, args)) }
     
@@ -39,7 +40,7 @@ export class Editor {
         this.actionsList.forEach(elem => {
             switch(elem.actionType) {
                 case Action.type.IMAGE_LOAD:
-                    this.photos[this.activePhoto].draw()
+                    this.getActivePhoto().draw()
                     break;
                 case Action.type.SCALE_LABEL:
                     this.scale.draw(...elem.params)
@@ -49,12 +50,6 @@ export class Editor {
             }
         }) 
     }
-
-    // drawPhoto() { 
-    //     this.actionsList = []
-    //     this.addAction(Action.type.IMAGE_LOAD, [])
-    //     this.redraw()
-    // }
 
     drawScaleLabel(type) {
         this.removeScaleLabel()
@@ -128,27 +123,22 @@ export class Scale {
     draw(text, lineWidth) {
         const width = this.canvas.width
         const height = this.canvas.height
-        let leftOffset = 0
-        let rightOffset = 0
-        if (lineWidth % 2 == 0) {
-            leftOffset = lineWidth / 2
-            rightOffset = lineWidth / 2
-        } else {
-            leftOffset = Math.floor(lineWidth / 2)
-            rightOffset = leftOffset + 1
-        }
 
         $(this.canvasId).drawText({
             fillStyle: this.color === Scale.Color.BLACK ? '#000' : '#fff',
+            strokeStyle: '#000',
+            strokeWidth: this.color === Scale.Color.BLACK ? 0 : 1,
             x: width - 195, y: height - 50,
             fontSize: 75,
             fontFamily: 'Times New Roman',
             text: text
-        }).drawLine({
-            strokeStyle: this.color === Scale.Color.BLACK ? '#000' : '#fff',
-            strokeWidth: 8,
-            x1: width - 200 - leftOffset, y1: height - 20,
-            x2: width - 200 + rightOffset, y2: height - 20
-        });
+        }).drawRect({
+            fillStyle: this.color === Scale.Color.BLACK ? '#000' : '#fff',
+            strokeStyle: '#000',
+            strokeWidth: 1,
+            x: width - 200, y: height - 20,
+            width: lineWidth - 2,
+            height: 6
+          });
     }
 }

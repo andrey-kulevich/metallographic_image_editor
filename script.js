@@ -6,6 +6,7 @@ var editor = new Editor('cv')
 $('#upload').click(() => { $('#file-input').trigger('click') })
 $('#file-input').change((event) => { 
     editor.loadPhotos(event.target.files) 
+    $('.filename').text(editor.getActivePhoto().name)
 })
 
 var isEnglish = false
