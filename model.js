@@ -30,13 +30,9 @@ export class Editor {
         this.addAction(Action.type.IMAGE_LOAD, [])
     }
 
-    photos() { return this.photos }
-
     setActivePhoto(index) { this.activePhoto = index }
 
     addAction(actionType, args) { this.actionsList.push(new Action(actionType, args)) }
-
-    scale() { return this.scale }
     
     redraw() { 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
