@@ -45,19 +45,19 @@
         <div class="modal-body">
           <p>Программа для обработки снимков с металлографического микроскопа.</p>
           <p>
-            Разработчик - Кулевич Андрей, каф. ПОАС ВолгГТУ (профиль на GitHub: 
+            Разработчик - Кулевич Андрей Павлович, каф. ПОАС ВолгГТУ (профиль на GitHub: 
             <a href="https://github.com/andrey-kulevich">https://github.com/andrey-kulevich</a>).
           </p>
-          <p>Вдохновитель - Кулевич Виталий, каф. МВ ВолгГТУ.</p>
+          <p>Вдохновитель - Кулевич Виталий Павлович, каф. МВ ВолгГТУ.</p>
         </div>
       </div>
     </div>
   </div>
 
   <!-- tool bar -->
-  <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <ul class="nav" id="toolbar">
     <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">Масштаб</a>
+      <button class="btn btn-outline-secondary dropdown-toggle ms-3 me-1 mt-1" data-bs-toggle="dropdown" role="button" aria-expanded="false">Масштаб</button>
       <ul class="dropdown-menu">
         <li><a name="x50scale" class="dropdown-item">х50</a></li>
         <li><a name="x100scale" class="dropdown-item">х100</a></li>
@@ -66,41 +66,24 @@
         <li><a name="x1000scale" class="dropdown-item">х1000</a></li>
         <li><hr class="dropdown-divider"></li>
         <li><a name="scaleLang" class="dropdown-item">um</a></li>
-        <li><a name="scaleColor" class="dropdown-item">белый цвет</a></li>
       </ul>
     </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="leftTopTab" data-bs-toggle="tab" data-bs-target="#leftTopLabel" 
-              type="button" role="tab" aria-controls="home" aria-selected="true">Левая верхняя метка</button>
+    <li class="nav-item dropdown">
+      <button class="btn btn-outline-secondary dropdown-toggle m-1" data-bs-toggle="dropdown" role="button" aria-expanded="false">Метка</button>
+      <ul class="dropdown-menu">
+        <li><a name="leftTopLabel" class="dropdown-item">Левая верхняя</a></li>
+        <li><a name="leftBottomLabel" class="dropdown-item">Левая нижняя</a></li>
+        <li><a name="rightTopLabel" class="dropdown-item">Правая верхняя</a></li>
+        <li><a name="randomLabel" class="dropdown-item">Произвольная</a></li>
+      </ul>
     </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="leftBottomTab" data-bs-toggle="tab" data-bs-target="#leftBottomLabel" 
-              type="button" role="tab" aria-controls="profile" aria-selected="false">Левая нижняя метка</button>
+    <li class="nav-item">
+      <button id="labelColorButton" class="btn btn-outline-secondary m-1 active">Цвет: черный</button>
     </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="randomTab" data-bs-toggle="tab" data-bs-target="#randomLabel" 
-              type="button" role="tab" aria-controls="contact" aria-selected="false">Произвольная метка</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="leftTopLabel" role="tabpanel" aria-labelledby="leftTopTab">
-          <div class="input-group ms-2 p-1">
-            <input type="text" class="form-control" placeholder="Левая верхняя метка" aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button class="btn btn-outline-secondary" type="button" id="buttonLeftTop">ОК</button>
-          </div>
-        </div>
-        <div class="tab-pane fade" id="leftBottomLabel" role="tabpanel" aria-labelledby="leftBottomTab">
-          <div class="input-group ms-2 p-1">
-            <input type="text" class="form-control" placeholder="Левая нижняя метка" aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button class="btn btn-outline-secondary" type="button" id="buttonLeftBottom">ОК</button>
-          </div>
-        </div>
-        <div class="tab-pane fade" id="randomLabel" role="tabpanel" aria-labelledby="randomTab">
-          <div class="input-group ms-2 p-1">
-            <input type="text" class="form-control" placeholder="Произвольная метка" aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button class="btn btn-outline-secondary" type="button" id="buttonRandom">ОК</button>
-          </div>
-        </div>
+    <li class="nav-item">
+      <div class="input-group ms-2 p-1">
+        <input id="labelInput" type="text" class="form-control" placeholder="Левая верхняя метка">
+        <button id="labelButton" class="btn btn-outline-secondary" type="button">ОК</button>
       </div>
     </li>
   </ul>
