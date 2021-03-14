@@ -2,6 +2,11 @@
     box-shadow: 0 0 4px rgba(0,0,0,0.2);
 }
 
+#toolbar {
+    margin-top: 0.2em;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
 .canvas {
     margin-top: 1em;
     margin-bottom: 1em;
@@ -10,4 +15,12 @@
     width: 1024px;
     height: 768px;
     box-shadow: 0 0 7px rgba(0,0,0,0.4);
+}
+
+.filename {
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1024px;
 }
