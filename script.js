@@ -56,7 +56,8 @@ $('#labelButton').click(() => {
         case 'Правая верхняя метка':
             editor.drawLabel(Action.type.RIGHT_TOP_LABEL, text) 
             break;
-        default:
+        case 'Произвольная метка':
+            editor.drawFloatingLabel(text)
             break;
     }
 })

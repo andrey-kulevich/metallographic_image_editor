@@ -7,11 +7,14 @@ export class Action {
         LEFT_BOTTOM_LABEL: 3,
         RIGHT_TOP_LABEL: 4, 
         RANDOM_LABEL: 5, 
-        ARROW: 6})
+        ARROW: 6
+    })
 
-    constructor(actionType, params) {
+    constructor(actionType, params, actionIndex=-1) {
+        console.log(actionIndex)
         this.actionType = actionType,
-        this.params = params
+        this.params = params,
+        this.actionIndex = actionIndex // index of element to iterate through arrays of identical actions
     }
 }
 
@@ -32,7 +35,7 @@ export class Editor {
         this.labels.push(new FixedLabel(canvasId, Action.type.RIGHT_TOP_LABEL))
     }
 
-    addAction(actionType, args) { this.actionsList.push(new Action(actionType, args)) }
+    addAction(actionType, args, actionIndex=-1) { this.actionsList.push(new Action(actionType, args, actionIndex)) }
     
     redraw() { 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
@@ -53,6 +56,9 @@ export class Editor {
                 case Action.type.RIGHT_TOP_LABEL:
                     this.fixedLabel(Action.type.RIGHT_TOP_LABEL).draw(...elem.params)
                     break;
+                // case Action.type.RANDOM_LABEL:
+                //     this.labels[elem.actionIndex].draw(...elem.params)
+                //     break;
             }
         }) 
     }
@@ -87,6 +93,13 @@ export class Editor {
         this.removeLabel(Action.type.SCALE_LABEL)
         this.addAction(Action.type.SCALE_LABEL, type)
         this.redraw()
+    }
+
+    drawFloatingLabel(text) {
+        this.labels.push(new FloatingLabel(this.canvasId))
+        this.labels[this.labels.length - 1].draw(text)
+        //this.addAction(Action.type.RANDOM_LABEL, [text], this.labels.length - 1)
+        //this.redraw()
     }
 
     removeLabel(type) {
@@ -222,6 +235,29 @@ export class FixedLabel extends Label {
             fontFamily: 'Times New Roman',
             text: text,
             fromCenter: false
+        })
+    }
+}
+
+export class FloatingLabel extends Label {
+
+    constructor(canvasId) { 
+        super(canvasId) 
+    }
+
+    draw(text) {
+        $(this.canvasId).drawText({
+            fillStyle: this.color === Label.Color.BLACK ? '#000' : '#fff',
+            strokeStyle: '#000',
+            strokeWidth: this.color === Label.Color.BLACK ? 0 : 1,
+            x: 100, y: 100,
+            fontSize: 75,
+            fontFamily: 'Times New Roman',
+            text: text,
+            fromCenter: false,
+            layer: true,
+            draggable: true,
+            bringToFront: true
         })
     }
 }
