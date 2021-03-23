@@ -1,12 +1,12 @@
-import { Action, Editor, ScaleLabel, Label } from './model.js'
+import { Action, Editor, ScaleLabel, loadPhotos, getNameOfCurrentPhoto } from './model.js'
 
 var canvas = document.getElementById('cv')
 var editor = new Editor('cv')
 
 $('#upload').click(() => { $('#file-input').trigger('click') })
 $('#file-input').change((event) => { 
-    editor.loadPhotos(event.target.files) 
-    $('.filename').text(editor.getActivePhoto().name)
+    loadPhotos(event.target.files) 
+    $('.filename').text(getNameOfCurrentPhoto())
 })
 
 var isScaleEnglish = false
@@ -66,3 +66,8 @@ $('#save').click((e) => {
     e.target.setAttribute('download', editor.getActivePhoto().name)
     e.target.setAttribute('href', canvas.toDataURL("image/jpg").replace("image/jpg", "image/octet-stream"))
 })
+
+// Open list of photos
+$('#listOfPhotos').click((e) => { document.getElementById("mySidenav").style.width = "300px"; })
+// Close list of photos
+$('#listOfPhotosClose').click((e) => { document.getElementById("mySidenav").style.width = "0"; })

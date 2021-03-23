@@ -1,14 +1,13 @@
-activeFrame = 0
+var activeFrame = 0
 
-function loadPhotos(files) {
+export function loadPhotos(files) {
     Array.from(files).forEach((value, index)  => {
         const photo = {
             name: `photo_${activeFrame + index}`,
-            data: {
-                filename: value.name
-            },
+            groups: [(activeFrame + index).toString()],
+            data: { filename: value.name },
             layer: true,
-            visible: false,
+            visible: activeFrame + index === 0,
             source: new Image(),
             fromCenter: false,
             x: 0, y: 0
@@ -17,16 +16,25 @@ function loadPhotos(files) {
         let reader = new FileReader()
         reader.readAsDataURL(value)
         reader.onload = (e) => {
-            if (e.target.readyState == FileReader.DONE) 
-                frame.photo.source.src = e.target.result
+            if (e.target.readyState == FileReader.DONE) {
+                photo.source.src = e.target.result
+                $('#cv').drawImage(photo)
+            }
         }
-
-        $(this.canvasId).drawImage(photo);
     })
 }
 
-function showActivePhoto() {
-    
+export function getNameOfCurrentPhoto() {
+
+    console.log(activeFrame.toString())
+    return $('#cv').getLayer('photo_' + activeFrame.toString()).data.filename
+} 
+
+export function switchActiveFrame(index) {
+    $('#cv').getLayerGroup(activeFrame.toString()).forEach(elem => elem.visible = false)
+    activeFrame = index
+    $('#cv').getLayerGroup(activeFrame.toString()).forEach(elem => elem.visible = true)
+    $('#cv').drawLayers()
 }
 
 
@@ -96,11 +104,6 @@ export class Editor {
 
     loadPhotos(files) {
         Array.from(files).forEach((value, index)  => {
-            {
-                photo: null,
-                labels: [],
-                actions: []
-            }
             let photo = new Photo(this.canvasId)
             photo.load(value)
             this.photos.push(photo)
