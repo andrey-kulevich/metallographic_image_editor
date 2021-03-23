@@ -1,3 +1,35 @@
+activeFrame = 0
+
+function loadPhotos(files) {
+    Array.from(files).forEach((value, index)  => {
+        const photo = {
+            name: `photo_${activeFrame + index}`,
+            data: {
+                filename: value.name
+            },
+            layer: true,
+            visible: false,
+            source: new Image(),
+            fromCenter: false,
+            x: 0, y: 0
+        }
+
+        let reader = new FileReader()
+        reader.readAsDataURL(value)
+        reader.onload = (e) => {
+            if (e.target.readyState == FileReader.DONE) 
+                frame.photo.source.src = e.target.result
+        }
+
+        $(this.canvasId).drawImage(photo);
+    })
+}
+
+function showActivePhoto() {
+    
+}
+
+
 export class Action {
     
     static type = Object.freeze({
@@ -63,9 +95,14 @@ export class Editor {
     }
 
     loadPhotos(files) {
-        Array.from(files).forEach(file => {
+        Array.from(files).forEach((value, index)  => {
+            {
+                photo: null,
+                labels: [],
+                actions: []
+            }
             let photo = new Photo(this.canvasId)
-            photo.load(file)
+            photo.load(value)
             this.photos.push(photo)
         })
         this.getActivePhoto().img.onload = () => this.getActivePhoto().draw()
@@ -112,30 +149,32 @@ export class Editor {
     }
 }
 
-export class Photo {
+// export class Photo {
     
-    name = ''
-    img = new Image()
+//     name = ''
+//     img = new Image()
 
-    constructor(canvasId) { 
-        this.canvasId = canvasId 
-        this.canvas = document.getElementById(canvasId)
-        this.ctx = this.canvas.getContext("2d") 
-    }
+//     constructor(canvasId) { this.canvasId = '#' + canvasId }
 
-    load(file) {
-        this.name = file.name
-        let reader = new FileReader()
-        reader.readAsDataURL(file)
-        reader.onload = (e) => {
-            if (e.target.readyState == FileReader.DONE) {
-                this.img.src = e.target.result
-            }
-        }
-    }
+//     load(file) {
+//         this.name = file.name
+//         let reader = new FileReader()
+//         reader.readAsDataURL(file)
+//         reader.onload = (e) => {
+//             if (e.target.readyState == FileReader.DONE) this.img.src = e.target.result
+//         }
+//     }
 
-    draw() { this.ctx.drawImage(this.img, 0, 0) }
-}
+//     draw() {
+//         $(this.canvasId).drawImage({
+//             name: '',
+//             layer: true,
+//             source: this.img,
+//             fromCenter: false,
+//             x: 0, y: 0
+//         });
+//     }
+// }
 
 export class Label {
 
