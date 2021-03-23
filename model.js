@@ -11,7 +11,6 @@ export class Action {
     })
 
     constructor(actionType, params, actionIndex=-1) {
-        console.log(actionIndex)
         this.actionType = actionType,
         this.params = params,
         this.actionIndex = actionIndex // index of element to iterate through arrays of identical actions
@@ -56,9 +55,9 @@ export class Editor {
                 case Action.type.RIGHT_TOP_LABEL:
                     this.fixedLabel(Action.type.RIGHT_TOP_LABEL).draw(...elem.params)
                     break;
-                // case Action.type.RANDOM_LABEL:
-                //     this.labels[elem.actionIndex].draw(...elem.params)
-                //     break;
+                case Action.type.RANDOM_LABEL:
+                     this.labels[elem.actionIndex].draw(...elem.params)
+                     break;
             }
         }) 
     }
@@ -97,9 +96,9 @@ export class Editor {
 
     drawFloatingLabel(text) {
         this.labels.push(new FloatingLabel(this.canvasId))
-        this.labels[this.labels.length - 1].draw(text)
-        //this.addAction(Action.type.RANDOM_LABEL, [text], this.labels.length - 1)
-        //this.redraw()
+        // this.labels[this.labels.length - 1].draw(text)
+        this.addAction(Action.type.RANDOM_LABEL, [text], this.labels.length - 1)
+        this.redraw()
     }
 
     removeLabel(type) {
@@ -180,6 +179,7 @@ export class ScaleLabel extends Label {
         const height = this.canvas.height
 
         $(this.canvasId).drawText({
+            //layer: true,
             fillStyle: this.color === Label.Color.BLACK ? '#000' : '#fff',
             strokeStyle: '#000',
             strokeWidth: this.color === Label.Color.BLACK ? 0 : 1,
@@ -188,6 +188,7 @@ export class ScaleLabel extends Label {
             fontFamily: 'Times New Roman',
             text: text
         }).drawRect({
+            //layer: true,
             fillStyle: this.color === Label.Color.BLACK ? '#000' : '#fff',
             strokeStyle: '#000',
             strokeWidth: 1,
@@ -241,6 +242,9 @@ export class FixedLabel extends Label {
 
 export class FloatingLabel extends Label {
 
+    x = 100
+    y = 100
+
     constructor(canvasId) { 
         super(canvasId) 
     }
@@ -250,14 +254,22 @@ export class FloatingLabel extends Label {
             fillStyle: this.color === Label.Color.BLACK ? '#000' : '#fff',
             strokeStyle: '#000',
             strokeWidth: this.color === Label.Color.BLACK ? 0 : 1,
-            x: 100, y: 100,
+            x: this.x, y: this.y,
             fontSize: 75,
             fontFamily: 'Times New Roman',
             text: text,
             fromCenter: false,
-            layer: true,
+            //layer: true,
             draggable: true,
-            bringToFront: true
+            //bringToFront: true,
+            updateDragX: function (layer, x) {
+                this.x += 3
+                return x + 3
+            },
+            updateDragY: function (layer, y) {
+                this.y += 3
+                return y + 3
+            }
         })
     }
 }
