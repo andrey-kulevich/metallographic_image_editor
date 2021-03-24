@@ -1,32 +1,37 @@
 var activeFrame = 0
 
-export function loadPhotos(files) {
-    Array.from(files).forEach((value, index)  => {
-        const photo = {
-            name: `photo_${activeFrame + index}`,
-            groups: [(activeFrame + index).toString()],
-            data: { filename: value.name },
-            layer: true,
-            visible: activeFrame + index === 0,
-            source: new Image(),
-            fromCenter: false,
-            x: 0, y: 0
-        }
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-        let reader = new FileReader()
-        reader.readAsDataURL(value)
-        reader.onload = (e) => {
-            if (e.target.readyState == FileReader.DONE) {
-                photo.source.src = e.target.result
-                $('#cv').drawImage(photo)
-            }
-        }
-    })
+export function loadPhotos(files) {
+    return new Promise((resolve, reject) => {
+        Array.from(files).forEach((value, index) => {
+            const photo = {
+                name: `photo_${activeFrame + index}`,
+                groups: [(activeFrame + index).toString(), 'photos'],
+                data: { filename: value.name },
+                layer: true,
+                visible: activeFrame + index === 0,
+                source: new Image(),
+                fromCenter: false,
+                x: 0, y: 0
+            };
+
+            let reader = new FileReader();
+            reader.readAsDataURL(value);
+            reader.onload = (e) => {
+                if (e.target.readyState == FileReader.DONE) {
+                    photo.source.src = e.target.result;
+                    $('#cv').drawImage(photo);
+                }
+                resolve(true)
+            };
+        })
+    })      
 }
 
 export function getNameOfCurrentPhoto() {
-
-    console.log(activeFrame.toString())
     return $('#cv').getLayer('photo_' + activeFrame.toString()).data.filename
 } 
 
@@ -36,6 +41,36 @@ export function switchActiveFrame(index) {
     $('#cv').getLayerGroup(activeFrame.toString()).forEach(elem => elem.visible = true)
     $('#cv').drawLayers()
 }
+
+export function getAllPhotosNames() {
+    return $('#cv').getLayerGroup('photos').map(elem => elem.name)
+}
+
+
+export function drawPreview(canvasId, photoLayer) {
+    $(canvasId).drawImage({
+        source: $('#cv').getLayer(photoLayer).source,
+        //fromCenter: false,
+        scale: 0.25,
+        x: document.getElementById('cv').width / 8, y: document.getElementById('cv').height / 8
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 export class Action {
